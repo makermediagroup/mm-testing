@@ -1,58 +1,49 @@
-import { FC, FormEvent } from "react";
-import StoresFormStateSelect from "./StoresFormStatesSelect";
-import StoresFormRegionsSelect from "./StoresFormRegionsSelect";
 import { Link, useNavigate } from "@tanstack/react-router";
+import { type FC, type FormEvent } from "react";
 
-interface StoresFormProps {
-  store?: {
-    storeId: number;
+interface BrandsFormProps {
+  brand?: {
+    brandId: number;
+    advertiserId: number;
+    categoryId: number;
     name: string;
-    location: string;
-    stateId: number;
-    regionId: number;
   };
   submitText: string;
   mutation: any;
 }
 
-const StoresForm: FC<StoresFormProps> = (props) => {
+const BrandsForm: FC<BrandsFormProps> = (props) => {
   const navigate = useNavigate();
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    try {
-      const { name, location, state, region } = event.target as HTMLFormElement;
-      const data = {
-        name: name.value,
-        location: location.value,
-        stateId: Number(state.value),
-        regionId: Number(region.value),
-        storeFormatId: 1,
-      };
-      console.log(data);
-      props.mutation.mutate(data);
-      navigate({ to: "/app/stores" });
-    } catch (error) {
-      console.log(error);
-    }
+    const { name, category, adversiter } = event.target as HTMLFormElement;
+
+    const data = {
+      name: name.value,
+      categoryId: Number(category.value),
+      advertiserId: Number(adversiter.value),
+    };
+    props.mutation.mutate(data);
+    navigate({ to: "/app/brands" });
   };
 
   return (
     <div>
-      <h1 className="text-3xl mr-auto">{props.submitText} store</h1>
+      <h1 className="text-3xl mr-auto">{props.submitText} brand</h1>
       <form onSubmit={onSubmit} className="mt-4 bg-white p-4 rounded">
-        <div className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-6">
           <div className="sm:col-span-3">
             <label
               htmlFor="name"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
-              Store name
+              Brand name
             </label>
             <div className="mt-2">
               <input
-                defaultValue={props.store?.name ?? ""}
+                defaultValue={props.brand?.name ?? ""}
                 type="text"
                 name="name"
                 id="name"
@@ -61,30 +52,48 @@ const StoresForm: FC<StoresFormProps> = (props) => {
               />
             </div>
           </div>
+
           <div className="sm:col-span-3">
             <label
-              htmlFor="location"
+              htmlFor="category"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
-              Store location
+              Brand category
             </label>
             <div className="mt-2">
               <input
-                defaultValue={props.store?.location ?? ""}
+                defaultValue={props.brand?.categoryId ?? ""}
                 type="text"
-                name="location"
-                id="location"
+                name="category"
+                id="category"
                 autoComplete="given-name"
                 className="block w-full rounded px-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
-          <StoresFormStateSelect defaultValue={props.store?.stateId ?? 0} />
-          <StoresFormRegionsSelect defaultValue={props.store?.regionId ?? 0} />
+
+          <div className="sm:col-span-3">
+            <label
+              htmlFor="advertiser"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Brand advertiser
+            </label>
+            <div className="mt-2">
+              <input
+                defaultValue={props.brand?.advertiserId ?? ""}
+                type="text"
+                name="adversiter"
+                id="advertiser"
+                autoComplete="given-name"
+                className="block w-full rounded px-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              />
+            </div>
+          </div>
         </div>
         <div className="space-x-2 mt-4 flex justify-end items-center">
           <Link
-            to="/app/stores"
+            to="/app/brands"
             className="text-sm font-semibold leading-6 text-gray-900 text-center"
           >
             Cancel
@@ -101,4 +110,4 @@ const StoresForm: FC<StoresFormProps> = (props) => {
   );
 };
 
-export default StoresForm;
+export default BrandsForm;

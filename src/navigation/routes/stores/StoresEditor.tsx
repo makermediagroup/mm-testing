@@ -42,8 +42,6 @@ const StoresEditor = () => {
     return <p>No data</p>;
   }
 
-  console.log(query.data);
-
   return (
     <>
       <StoresForm submitText="Update" mutation={mutation} store={query.data} />

@@ -1,25 +1,29 @@
+import { type FC, useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
-import { FC, useState, useEffect } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import axios from "axios";
 
-interface StoreSquareItemProps {
-  store: {
-    storeId: number;
-    name: string;
-    location: string;
-  };
+interface Brand {
+  brandId: number;
+  advertiserId: number;
+  categoryId: number;
+  name: string;
 }
 
-const StoreSquareItem: FC<StoreSquareItemProps> = (props) => {
+interface BrandSquareItemProps {
+  brand: Brand;
+}
+
+const BrandSquareItem: FC<BrandSquareItemProps> = (props) => {
   const queryClient = useQueryClient();
+
   const mutation = useMutation({
-    mutationKey: ["deleteStore", props.store.storeId],
+    mutationKey: ["deleteBrand", props.brand.brandId],
     mutationFn: () =>
-      axios.delete(`https://localhost:7243/api/Store/${props.store.storeId}`),
+      axios.delete(`https://localhost:7243/api/Brand/${props.brand.brandId}`),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["stores"],
+        queryKey: ["brands"],
       });
     },
   });
@@ -42,15 +46,15 @@ const StoreSquareItem: FC<StoreSquareItemProps> = (props) => {
   return (
     <div className="p-2 bg-white rounded">
       <p>
-        <span className="font-bold">Name:</span> {props.store.name}
+        <span className="font-bold">Name:</span> {props.brand.name}
       </p>
       <p>
-        <span className="font-bold">Location:</span> {props.store.location}
+        <span className="font-bold">Location:</span> {props.brand.categoryId}
       </p>
       <div className="grid grid-cols-2 gap-2 mt-2">
         <Link
-          to="/app/stores/$id"
-          params={{ id: `${props.store.storeId}` }}
+          to="/app/brands/$id"
+          params={{ id: `${props.brand.brandId}` }}
           className="py-2 px-4 font-bold text-gray-900 bg-gray-200 rounded text-sm text-center"
         >
           Edit
@@ -66,4 +70,4 @@ const StoreSquareItem: FC<StoreSquareItemProps> = (props) => {
   );
 };
 
-export default StoreSquareItem;
+export default BrandSquareItem;

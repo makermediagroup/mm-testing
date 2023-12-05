@@ -4,10 +4,12 @@ import Login from "./routes/Login";
 import Register from "./routes/Register";
 import App from "./routes/App";
 import Stores from "./routes/stores/Stores";
-import Brands from "./routes/Brands";
+import Brands from "./routes/brands/Brands";
 import Restrictions from "./routes/Restrictions";
 import StoresEditor from "./routes/stores/StoresEditor";
 import StoresCreator from "./routes/stores/StoresCreator";
+import BrandsEditor from "./routes/brands/BrandsEditor";
+import BrandsCreator from "./routes/brands/BrandsCreator";
 
 const rootRoute = new RootRoute({
   component: Root,
@@ -55,6 +57,18 @@ const brandsRoute = new Route({
   component: Brands,
 });
 
+const brandsEditorRoute = new Route({
+  getParentRoute: () => appRoute,
+  path: "brands/$id",
+  component: BrandsEditor,
+});
+
+const brandsCreatorRoute = new Route({
+  getParentRoute: () => appRoute,
+  path: "brands/create",
+  component: BrandsCreator,
+});
+
 const restrictionsRoute = new Route({
   getParentRoute: () => appRoute,
   path: "restrictions",
@@ -69,6 +83,8 @@ const routeTree = rootRoute.addChildren([
     storesEditorRoute,
     storesCreatorRoute,
     brandsRoute,
+    brandsEditorRoute,
+    brandsCreatorRoute,
     restrictionsRoute,
   ]),
 ]);

@@ -48,7 +48,6 @@ const StoresFormRegionsSelect: FC<StoresFormRegionsSelectProps> = (props) => {
         >
           <option value="0">Select one</option>
           {regionsQuery.data.map((region) => {
-            console.log(region);
             return (
               <option key={region.regionId} value={region.regionId}>
                 {region.name} - {region.description}

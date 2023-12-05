@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { FC } from "react";
 import StoreSquareItem from "./StoresSquareItem";
+import StoreListItem from "./StoreListItem";
 
 interface StoreListProps {
   isListView: boolean;
@@ -36,13 +37,13 @@ const StoresList: FC<StoreListProps> = (props) => {
 
   if (props.isListView) {
     return (
-      <div>
-        <p>is list</p>
-      </div>
+      <ul role="list" className="divide-y divide-gray-100 bg-white p-4 rounded">
+        {query.data.map((store) => {
+          return <StoreListItem key={store.storeId} store={store} />;
+        })}
+      </ul>
     );
   }
-
-  console.log(query.data);
 
   return (
     <div className="grid md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5 gap-4">

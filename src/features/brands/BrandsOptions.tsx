@@ -1,15 +1,15 @@
 import { FC } from "react";
 import { Link } from "@tanstack/react-router";
 
-interface StoresOptionsProps {
+interface BrandsOptionsProps {
   isListView: boolean;
   onClickToggleView: () => void;
 }
 
-const StoresOptions: FC<StoresOptionsProps> = (props) => {
+const BrandsOptions: FC<BrandsOptionsProps> = (props) => {
   return (
     <div className="flex justify-end space-x-2">
-      <h1 className="text-3xl mr-auto font-bold">Stores</h1>
+      <h1 className="text-3xl mr-auto font-bold">Brands</h1>
 
       <button
         onClick={props.onClickToggleView}
@@ -37,7 +37,7 @@ const StoresOptions: FC<StoresOptionsProps> = (props) => {
             viewBox="0 0 24 24"
             strokeWidth={2}
             stroke="currentColor"
-            className="w-6 h-6 text-gray-900"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -48,13 +48,13 @@ const StoresOptions: FC<StoresOptionsProps> = (props) => {
         )}
       </button>
       <Link
-        to="/app/stores/create"
-        className="font-bold text-sm flex items-center justify-center px-4 text-gray-900 bg-gray-200 rounded"
+        to="/app/brands/create"
+        className="font-bold text-sm flex items-center justify-center px-4 text-indigo-900 bg-indigo-200 rounded"
       >
-        <p>Create store</p>
+        <p>Create brand</p>
       </Link>
     </div>
   );
 };
 
-export default StoresOptions;
+export default BrandsOptions;
