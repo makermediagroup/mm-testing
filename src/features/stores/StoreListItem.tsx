@@ -20,12 +20,12 @@ const StoreListItem: FC<StoreListItemProps> = (props) => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationKey: ["deleteBrand", props.store.storeId],
+    mutationKey: ["deleteStore", props.store.storeId],
     mutationFn: () =>
-      axios.delete(`https://localhost:7243/api/Brand/${props.store.storeId}`),
+      axios.delete(`https://localhost:7243/api/Store/${props.store.storeId}`),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["brands"],
+        queryKey: ["stores"],
       });
     },
   });
@@ -59,7 +59,7 @@ const StoreListItem: FC<StoreListItemProps> = (props) => {
       <div className="flex items-center space-x-2">
         <Link
           to="/app/stores/$id"
-          params={{ id: `${props.store.stateId}` }}
+          params={{ id: `${props.store.storeId}` }}
           className="py-2 px-4 font-bold text-gray-900 bg-gray-200 rounded text-sm text-center"
         >
           Edit
