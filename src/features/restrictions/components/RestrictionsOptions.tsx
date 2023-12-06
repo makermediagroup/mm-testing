@@ -1,15 +1,15 @@
 import { FC } from "react";
 import { Link } from "@tanstack/react-router";
 
-interface BrandsOptionsProps {
+interface RestrictionsOptionsProps {
   isListView: boolean;
   onClickToggleView: () => void;
 }
 
-const BrandsOptions: FC<BrandsOptionsProps> = (props) => {
+const RestrictionsOptions: FC<RestrictionsOptionsProps> = (props) => {
   return (
     <div className="flex justify-end space-x-2">
-      <h1 className="text-3xl mr-auto font-bold">Brands</h1>
+      <h1 className="text-3xl mr-auto font-bold">Restrictions</h1>
 
       <button
         onClick={props.onClickToggleView}
@@ -37,7 +37,7 @@ const BrandsOptions: FC<BrandsOptionsProps> = (props) => {
             viewBox="0 0 24 24"
             strokeWidth={2}
             stroke="currentColor"
-            className="w-6 h-6"
+            className="w-6 h-6 text-gray-900"
           >
             <path
               strokeLinecap="round"
@@ -48,13 +48,13 @@ const BrandsOptions: FC<BrandsOptionsProps> = (props) => {
         )}
       </button>
       <Link
-        to="/app/brands/create"
+        to="/app/restrictions/create"
         className="font-bold text-sm flex items-center justify-center px-4 text-gray-900 bg-gray-200 rounded"
       >
-        <p>Create brand</p>
+        <span>Create restriction</span>
       </Link>
     </div>
   );
 };
 
-export default BrandsOptions;
+export default RestrictionsOptions;
