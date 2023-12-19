@@ -5,7 +5,7 @@ const StoresCreator = () => {
   const mutation = useMutation({
     mutationKey: ["createStore"],
     mutationFn: (body: any) =>
-      axios.post("https://localhost:7243/api/Store", body),
+      axios.post("https://localhost:7243/api/store", body),
   });
 
   return (

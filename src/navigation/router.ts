@@ -11,6 +11,8 @@ import StoresCreator from "./routes/stores/StoresCreator";
 import BrandsEditor from "./routes/brands/BrandsEditor";
 import BrandsCreator from "./routes/brands/BrandsCreator";
 import RestrictionsCreator from "./routes/restrictions/RestrictionsCreator";
+import Quotations from "./routes/quotations/Quotations";
+import QuotationsCreator from "./routes/quotations/QuotationsCreator";
 
 const rootRoute = new RootRoute({
   component: Root,
@@ -82,6 +84,18 @@ const restrictionsCreatorRoute = new Route({
   component: RestrictionsCreator,
 });
 
+const quotationsRoute = new Route({
+  getParentRoute: () => appRoute,
+  path: "quotations",
+  component: Quotations
+});
+
+const quotationsCreatorRoute = new Route({
+  getParentRoute: () => appRoute,
+  path: "quotations/create",
+  component: QuotationsCreator
+})
+
 const routeTree = rootRoute.addChildren([
   loginRoute,
   registerRoute,
@@ -94,6 +108,8 @@ const routeTree = rootRoute.addChildren([
     brandsCreatorRoute,
     restrictionsRoute,
     restrictionsCreatorRoute,
+    quotationsRoute,
+    quotationsCreatorRoute
   ]),
 ]);
 

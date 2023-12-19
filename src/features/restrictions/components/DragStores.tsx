@@ -18,7 +18,7 @@ const DragStores: FC<DragStoresProps> = (props) => {
   const query = useQuery<Store[]>({
     queryKey: ["stores"],
     queryFn: () =>
-      fetch("https://localhost:7243/api/Store").then((res) => res.json()),
+      fetch("https://localhost:7243/api/store").then((res) => res.json()),
   });
 
   if (query.isFetching) {

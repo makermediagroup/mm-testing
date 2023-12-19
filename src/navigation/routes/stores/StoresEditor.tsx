@@ -20,14 +20,14 @@ const StoresEditor = () => {
     queryKey: ["stores", storeId],
     queryFn: () =>
       axios
-        .get(`https://localhost:7243/api/Store/${storeId}`)
+        .get(`https://localhost:7243/api/store/${storeId}`)
         .then((res) => res.data),
   });
 
   const mutation = useMutation({
     mutationKey: ["updateStore", storeId],
     mutationFn: (data: any) =>
-      axios.put(`https://localhost:7243/api/Store/${storeId}`, data),
+      axios.put(`https://localhost:7243/api/store/${storeId}`, data),
   });
 
   if (query.isFetching) {

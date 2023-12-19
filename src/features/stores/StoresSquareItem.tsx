@@ -16,7 +16,7 @@ const StoreSquareItem: FC<StoreSquareItemProps> = (props) => {
   const mutation = useMutation({
     mutationKey: ["deleteStore", props.store.storeId],
     mutationFn: () =>
-      axios.delete(`https://localhost:7243/api/Store/${props.store.storeId}`),
+      axios.delete(`https://localhost:7243/api/store/${props.store.storeId}`),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["stores"],
