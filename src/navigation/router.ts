@@ -13,6 +13,9 @@ import BrandsCreator from "./routes/brands/BrandsCreator";
 import RestrictionsCreator from "./routes/restrictions/RestrictionsCreator";
 import Quotations from "./routes/quotations/Quotations";
 import QuotationsCreator from "./routes/quotations/QuotationsCreator";
+import Media from "./routes/media/Media";
+import MediaCreator from "./routes/media/MediaCreator";
+import MediaEditor from "./routes/media/MediaEditor";
 
 const rootRoute = new RootRoute({
   component: Root,
@@ -96,6 +99,24 @@ const quotationsCreatorRoute = new Route({
   component: QuotationsCreator
 })
 
+const mediaRoute = new Route({
+  getParentRoute: () => appRoute,
+  path: "media",
+  component: Media,
+});
+
+const mediaCreatorRoute = new Route({
+  getParentRoute: () => appRoute,
+  path: "media/create",
+  component: MediaCreator
+});
+
+const mediaEditorRoute = new Route({
+  getParentRoute: () => appRoute,
+  path: "media/$id",
+  component: MediaEditor
+});
+
 const routeTree = rootRoute.addChildren([
   loginRoute,
   registerRoute,
@@ -109,7 +130,10 @@ const routeTree = rootRoute.addChildren([
     restrictionsRoute,
     restrictionsCreatorRoute,
     quotationsRoute,
-    quotationsCreatorRoute
+    quotationsCreatorRoute,
+    mediaRoute,
+    mediaCreatorRoute,
+    mediaEditorRoute
   ]),
 ]);
 
